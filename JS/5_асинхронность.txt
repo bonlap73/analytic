@@ -1,0 +1,39 @@
+«адание: „то выведетс€ в консоль?
+---------------------------------
+console.log("start");
+
+setTimeout(() => console.log("timeout"), 0);
+
+new Promise((resolve, reject) => {
+    console.log("promise constructor");
+
+    reject();
+})
+    .then(() => console.log("p1"))
+    .catch(() => console.log("p2"))
+    .catch(() => console.log("p3"))
+    .then(() => console.log("p4"))
+    .then(() => console.log("p5"));
+
+console.log("final");
+---------------------------------
+¬ консоль будет выводитьс€ разный результат в зависимости от IDE, в одних случа€ вывод будет таким:
+
+start
+promise constructor
+final
+p2
+p4
+p5
+
+¬ других случа€х вывод может быть таким:
+
+start
+promise constructor
+final
+p2
+p4
+p5
+timeout
+
+"timeout" выводитс€ после "p5", что означает, что setTimeout выполнилс€ после всех then-обработчиков промиса.
